@@ -35,7 +35,7 @@ as <a href="http://groups.csail.mit.edu/mac/users/gjs/6946/refman.txt"><code>SCM
 
 <p>We derive the Lagrange equations for the following system. A particle of mass \(m\) moves in a two-dimensional potential \(V(x, y) = (x^2 + y^2)/2 + x^2 y - y^3/3\), where \(x\) and \(y\) are rectangular coordinates of the particle. A Lagrangian is \(L(t; x, y; v_x, v_y) = (1/2) m (v_x^2 + v_y^2) - V(x, y)\).</p>
 
-<div class="live" id="ex">
+<div class="live" id="ex" data-lib="lib">
 (define (Lagrange-eq L q)
   (- (D (compose ((partial 2) L) (Gamma q)))
      (compose ((partial 1) L) (Gamma q))))
@@ -58,8 +58,7 @@ as <a href="http://groups.csail.mit.edu/mac/users/gjs/6946/refman.txt"><code>SCM
    ((literal-function 'x) t)
    ((literal-function 'y) t)))
 
-(html-show-expression ((Lagrange-eq (L 'm) q) 't)))
-</div>
+(html-show-expression ((Lagrange-eq (L 'm) q) 't)))</div>
 
 <h2>Notation (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html"><i class="fa fa-link"></i></a>)</h2>
 
