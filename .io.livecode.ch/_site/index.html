@@ -68,4 +68,40 @@ as <a href="http://groups.csail.mit.edu/mac/users/gjs/6946/refman.txt"><code>SCM
 <div class="live" id="ex2" data-lib="lib ex">
 (html-show-expression ((Lagrange-eq (L 'm) q) 't)))
 </div>
+
+<h2>Notation (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html"><i class="fa fa-link"></i></a>)</h2>
+
+<h3>Derivatives (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_sec_Temp_452"><i class="fa fa-link"></i></a>)</h3>
+
+<p>The derivative of a function \(f\) is a function, denoted by \(Df\). Our notational convention is that \(D\) is a high-precedence operator. Thus \(D\) operates on the adjacent function before any other application occurs: \(Df(x)\) is the same as \((Df)(x)\). Higher-order derivatives are described by exponentiating the derivative operator. Thus the \(n\)th derivative of a function \(f\) is notated as \(D^n f\).
+
+<p>The Scheme procedure for producing the derivative of a function is named <code>D</code>. The derivative of the <code>sin</code> procedure is a procedure that computes <code>cos</code>:
+<div class="live" id="d1" data-lib="lib">
+(define derivative-of-sine (D sin))
+
+(html-show-expression (derivative-of-sine 'x))</div>
+</p>
+
+<p>The derivative of a function \(f\) is the function \(Df\) whose value for a particular argument is something that can be multiplied by an increment \(\Delta x\) in the argument to get a linear approximation to the increment in the value of \(f\):
+$$f(x + \Delta x) \approx f(x) + Df(x)\Delta x$$
+</p>
+
+<p>For example, let \(f\) be the function that cubes its argument \((f(x) = x3)\); then \(Df\) is the function that yields three times the square of its argument \((Df(y) = 3y2)\). So \(f(5) = 125\) and \(Df(5) = 75\). The value of \(f\) with argument \(x + \Delta x\) is
+$$f(x + \Delta x) = (x + \Delta x)^3 = x^3 + 3x^2\Delta x + 3x\Delta x^2 + \Delta x^3$$
+and
+$$Df(x)\Delta x = 3x^2 \Delta$$
+So \(Df(x)\) multiplied by \(\Delta x\) gives us the term in \(f(x + \Delta x)\) that is linear in \(\Delta x\), providing a good approximation to \(f(x + \Delta x) - f(x)\) when \(\Delta x\) is small.
+</p>
+
+<p>Derivatives of compositions obey the chain rule:
+$$D(f \circ g) = ((Df) \circ g) \cdot D g$$
+So at \(x\),
+$$(D(f \circ g))(x) = Df(g(x)) \cdot Dg(x)$$
+</p>
+
+<p>Derivatives are operators. An operator is like a function except that multiplication of operators is interpreted as composition, whereas multiplication of functions is multiplication of the values (see equation <a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#EQUATION_8.3">8.3</a>). If \(D\) were an ordinary function, then the rule for multiplication would imply that \(D^2 f\) would just be the product of \(Df\) with itself, which is not what is intended. Arithmetic is extended to allow manipulation of operators. A typical operator is \((D + 1)(D - 1) = D^2 - 1\), which subtracts a function from its second derivative. The \(1\) acts as the identity operator: When arithmetically combined with operators, a number is treated as an operator that multiplies its input by the number. Such an operator can be constructed and used in Scheme as follows:
+<div class="live" id="d2" data-lib="lib">
+(html-show-expression
+  (((* (- D 1) (+ D 1)) (literal-function 'f)) 'x))</div>
+
 {% endblock %}
