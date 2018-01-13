@@ -17,12 +17,13 @@ function livecode_process_data(id, data) {
   if (a.length==0) return data;
   $('#boxit-'+id).html(a.join('\n'));
   MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-  return "";
+  return data.replace(tex, "");
 }
 </script>
 <div class="live hidden" id="lib">
 (define (html-show-expression x)
-  (display (string-append "&lt;exp&gt;" (expression->tex-string (simplify x)) "&lt;/exp&gt;")))
+  (display (string-append "&lt;exp&gt;" (expression->tex-string (simplify x)) "&lt;/exp&gt;"))
+  x)
 </div>
 
 <p>
