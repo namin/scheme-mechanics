@@ -22,7 +22,7 @@ function livecode_process_data(id, data) {
 </script>
 <div class="live hidden" id="lib">
 (define (html-show-expression x)
-  (display (string-append "&lt;exp&gt;" (expression->tex-string x) "&lt;/exp&gt;")))
+  (display (string-append "&lt;exp&gt;" (expression->tex-string (simplify x)) "&lt;/exp&gt;")))
 </div>
 
 <p>
@@ -65,6 +65,6 @@ as <a href="http://groups.csail.mit.edu/mac/users/gjs/6946/refman.txt"><code>SCM
 
 <p>The derived equation pretty-printed:</p>
 <div class="live" id="ex2" data-lib="lib ex">
-(html-show-expression (simplify ((Lagrange-eq (L 'm) q) 't)))
+(html-show-expression ((Lagrange-eq (L 'm) q) 't)))
 </div>
 {% endblock %}
