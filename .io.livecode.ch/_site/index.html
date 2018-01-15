@@ -191,12 +191,12 @@ $$(\partial_i(f \circ g))(x) = Df(g(x)) \cdot \partial_i g(x)$$
 (html-show-expression ((D h) (up 'x 'y)))</div>
 </p>
 
-<p>A phase-space state function is a function of time, coordinates, and momenta. Let \(H\) be such a function. The value of \(H\) is \(H(t, ( x, y ), [ p_x , p_y ] )\) for time \(t\), coordinates \(( x, y )\) , and momenta [ p_x , p_y ]. Let \(s\) be the phase-space state tuple as <a href="#def-s">above</a>:
+<p>A phase-space state function is a function of time, coordinates, and momenta. Let \(H\) be such a function. The value of \(H\) is \(H(t, ( x, y ), [ p_x , p_y ] )\) for time \(t\), coordinates \(( x, y )\) , and momenta \([ p_x , p_y ]\). Let \(s\) be the phase-space state tuple as <a href="#def-s">above</a>:
 $$s = (t,(x,y),[p_x,p_y])$$
 The value of \(H\) for argument tuple \(s\) is \(H(s)\). We use both ways of writing the value of \(H\).
 </p>
 
-<p>We often show a function of multiple arguments that include tuples by indicating the boundaries of the argument tuples with semicolons and separating their components with commas. If \(H\) is a function of phase-space states with arguments \(t\), \(( x, y )\), and \([ px, py ]\), we may write \(H(t; x, y ; px, py)\). This notation loses the up/down distinction, but our semicolon-and-comma notation is convenient and reasonably unambiguous.</p>
+<p>We often show a function of multiple arguments that include tuples by indicating the boundaries of the argument tuples with semicolons and separating their components with commas. If \(H\) is a function of phase-space states with arguments \(t\), \(( x, y )\), and \([ p_x, p_y ]\), we may write \(H(t; x, y ; p_x, p_y)\). This notation loses the up/down distinction, but our semicolon-and-comma notation is convenient and reasonably unambiguous.</p>
 
 <p>The derivative of \(H\) is a function that produces an object that can be contracted with an increment in the argument structure to produce an increment in the function's value. The derivative is a down tuple of three partial derivatives. The first partial derivative is the partial derivative with respect to the numerical argument. The second partial derivative is a down tuple of partial derivatives with respect to each component of the up-tuple argument. The third partial derivative is an up tuple of partial derivatives with respect to each component of the down-tuple argument:
 $$\begin{align}
