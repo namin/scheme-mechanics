@@ -136,6 +136,7 @@ $$(D(f \circ g))(x) = Df(g(x)) \cdot Dg(x)$$
 <div class="live" id="d2" data-lib="lib">
 (html-show-expression
   (((* (- D 1) (+ D 1)) (literal-function 'f)) 'x))</div>
+(TODO: we do not get <code>(+ (((expt D 2) f) x) (* -1 (f x)))</code> as expected.)
 </p>
 
 <h3>Derivatives of functions of multiple arguments (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_sec_Temp_453"><i class="fa fa-link"></i></a>)</h3>
@@ -172,7 +173,7 @@ g(x + \Delta x, y + \Delta y) - g(x,y)
 
 <p>
 Partial derivatives of compositions also obey a chain rule:
-$$\partial_i(f \circ g) = ((Df) \circ) \cdot \partial_i g$$
+$$\partial_i(f \circ g) = ((Df) \circ g) \cdot \partial_i g$$
 So if \(x\) is a tuple of arguments, then
 $$(\partial_i(f \circ g))(x) = Df(g(x)) \cdot \partial_i g(x)$$
 </p>
