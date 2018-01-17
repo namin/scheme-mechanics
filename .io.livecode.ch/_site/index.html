@@ -209,7 +209,7 @@ I_{2,1}(s) &= p_y\\
 
 <p>For convenience we define the square of a tuple to be the sum of the squares of the components of the tuple. Tuples can be multiplied, as described below, but the square of a tuple is not the product of the tuple with itself.</p>
 
-<p>The meaning of multiplication of tuples depends on the structure of the tuples. Two tuples are compatible for contraction if they are of opposite types, they are of the same length, and corresponding elements have the following property: either they are both tuples and are compatible for contraction, or one of them is not a tuple. If two tuples are compatible for contraction then generic multiplication is interpreted as contraction: the result is the sum of the products of corresponding components of the tuples. For example, <a href="#p">\(p\)<a> and <a href="#v">\(v\)</a> introduced in equations above are compatible for contraction; the product is
+<p>The meaning of multiplication of tuples depends on the structure of the tuples. Two tuples are compatible for contraction if they are of opposite types, they are of the same length, and corresponding elements have the following property: either they are both tuples and are compatible for contraction, or one of them is not a tuple. If two tuples are compatible for contraction then generic multiplication is interpreted as contraction: the result is the sum of the products of corresponding components of the tuples. For example, <a href="#p">\(p\)</a> and <a href="#v">\(v\)</a> introduced in equations above are compatible for contraction; the product is
 $$pv = p_0v^0 + p_1v^1 + p_2v^2$$
 </p>
 
@@ -331,7 +331,7 @@ $$(D(f \circ g))(x) = Df(g(x)) \cdot Dg(x)$$
 (html-show-expression
   (((* (- D 1) (+ D 1)) (literal-function 'f)) 'x))</div>
 
-Errata: Note that we do not get <code>(+ (((expt D 2) f) x) (* -1 (f x)))</code> as expected.
+<p>Errata: Note that we do not get <code>(+ (((expt D 2) f) x) (* -1 (f x)))</code> as expected.
 We have to explicitly turn the <code>1</code> into an operator:</p>
 <div class="live" id="d2-bis" data-lib="lib">
 (html-show-expression
