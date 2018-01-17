@@ -82,20 +82,19 @@ Abdus Salam (1950).
 $$d(x_1,y_1,x_2,y_2) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
 </p>
 
-<p>In Scheme we can write this as:
+<p>In Scheme we can write this as:</p>
 <div class="live" id="f1" data-lib="lib">
 (define (d x1 y1 x2 y2)
   (sqrt (+ (square (- x2 x1)) (square (- y2 y1)))))
 
 (html-show-expression
   (d 'x1 'y1 'x2 'y2))</div>
-</p>
 
 <p>Functions may be composed if the range of one overlaps the domain of the other. The composition of functions is constructed by passing the output of one to the input of the other. We write the composition of two functions using the \(\circ\) operation:
 $$(f \circ g) : x \mapsto (f \circ g)(x) = f(g(x))$$
 </p>
 
-<p>A procedure <code>h</code> that computes the cube of the sine of its argument may be defined by composing the procedures <code>cube</code> and <code>sin</code>:
+<p>A procedure <code>h</code> that computes the cube of the sine of its argument may be defined by composing the procedures <code>cube</code> and <code>sin</code>:</p>
 <div class="live" id="f2" data-lib="lib">
 (define h (compose cube sin))
 
@@ -103,7 +102,6 @@ $$(f \circ g) : x \mapsto (f \circ g)(x) = f(g(x))$$
 which is the same as
 <div class="live" id="f3" data-lib="lib">
 (cube (sin 2))</div>
-</p>
 
 <p>Arithmetic is extended to the manipulation of functions: the usual mathematical operations may be applied to functions. Examples are addition and multiplication; we may add or multiply two functions if they take the same kinds of arguments and if their values can be added or multiplied:
 $$\begin{align}
@@ -112,46 +110,41 @@ $$\begin{align}
 \end{align}$$
 </p>
 
-<p>A procedure <code>g</code> that multiplies the cube of its argument by the sine of its argument is
+<p>A procedure <code>g</code> that multiplies the cube of its argument by the sine of its argument is</p>
 <div class="live" id="f4" data-lib="lib">
 (define g (* cube sin))
 
 (g 2)
 
 (* (cube 2) (sin 2))</div>
-</p>
 
 <h3>Symbolic values (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_sec_Temp_449"><i class="fa fa-link"></i></a>)</h3>
 
-<p>As in usual mathematical notation, arithmetic is extended to allow the use of symbols that represent unknown or incompletely specified mathematical objects. These symbols are manipulated as if they had values of a known type. By default, a Scheme symbol is assumed to represent a real number. So the expression <code>'a</code> is a literal Scheme symbol that represents an unspecified real number:
+<p>As in usual mathematical notation, arithmetic is extended to allow the use of symbols that represent unknown or incompletely specified mathematical objects. These symbols are manipulated as if they had values of a known type. By default, a Scheme symbol is assumed to represent a real number. So the expression <code>'a</code> is a literal Scheme symbol that represents an unspecified real number:</p>
 <div class="live" id="s1" data-lib="lib">
 (html-show-expression
  ((compose cube sin) 'a))</div>
-</p>
 
-<p>The procedure <code>print-expression</code> (likewise <code>html-show-expression</code>) simplifies the expression, removes the type tags, and displays it in a readable form. We can use the simplifier to verify a trigonometric identity:
+<p>The procedure <code>print-expression</code> (likewise <code>html-show-expression</code>) simplifies the expression, removes the type tags, and displays it in a readable form. We can use the simplifier to verify a trigonometric identity:</p>
 <div class="live" id="s2" data-lib="lib">
 (html-show-expression
   ((- (+ (square sin) (square cos)) 1) 'a))</div>
-</p>
 
-<p>Just as it is useful to be able to manipulate symbolic numbers, it is useful to be able to manipulate symbolic functions. The procedure <code>literal-function</code> makes a procedure that acts as a function having no properties other than its name. By default, a literal function is defined to take one real argument and produce one real value. For example, we may want to work with a function \(f : \mathbb{R} \rightarrow \mathbb{R}\):
+<p>Just as it is useful to be able to manipulate symbolic numbers, it is useful to be able to manipulate symbolic functions. The procedure <code>literal-function</code> makes a procedure that acts as a function having no properties other than its name. By default, a literal function is defined to take one real argument and produce one real value. For example, we may want to work with a function \(f : \mathbb{R} \rightarrow \mathbb{R}\):</p>
 <div class="live" id="s3" data-lib="lib">
 (html-show-expression
   ((literal-function 'f) 'x))
 
 (html-show-expression
   ((compose (literal-function 'f) (literal-function 'g)) 'x))</div>
-</p>
 
-<p>We can also make literal functions of multiple, possibly structured arguments that return structured values. For example, to denote a literal function named g that takes two real arguments and returns a real value \((g : \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R})\) we may write:
+<p>We can also make literal functions of multiple, possibly structured arguments that return structured values. For example, to denote a literal function named g that takes two real arguments and returns a real value \((g : \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R})\) we may write:</p>
 <div class="live norun" id="def-g" data-lib="">
 (define g (literal-function 'g (-> (X Real Real) Real)))</div>
 <div class="live" id="s4" data-lib="lib def-g">
 (html-show-expression (g 'x 'y))</div>
 
-We may use such a literal function anywhere that an explicit function of the same type may be used.
-</p>
+<p>We may use such a literal function anywhere that an explicit function of the same type may be used.</p>
 
 <p>There is a whole language for describing the type of a literal function in terms of the number of arguments, the types of the arguments, and the types of the values. Here we describe a function that maps pairs of real numbers to real numbers with the expression <code>(-> (X Real Real) Real)</code>. Later we will introduce structured arguments and values and show extensions of literal functions to handle these.</p>
 
@@ -167,7 +160,7 @@ $$p = [p_0,p_1,p_2]$$
 
 <p>A component of an up tuple is usually identified by a superscript. A component of a down tuple is usually identified by a subscript. We use zero-based indexing when referring to tuple elements. This notation follows the usual convention in tensor arithmetic.</p>
 
-<p>In Scheme we make tuples with the constructors up and down:
+<p>In Scheme we make tuples with the constructors up and down:</p>
 <div class="live norun" id="def-pv" data-lib="">
 (define v (up 'v^0 'v^1 'v^2))
 (define p (down 'p_0 'p_1 'p_2))</div>
@@ -175,16 +168,14 @@ $$p = [p_0,p_1,p_2]$$
 <div class="live" id="t1" data-lib="lib def-pv">
 (html-show-expression v)
 (html-show-expression p)</div>
-</p>
 
 <p>Tuple arithmetic is different from the usual tensor arithmetic in that the components of a tuple may also be tuples and different components need not have the same structure. For example, a tuple structure \(s\) of phase-space states is
 $$s = (t,(x,y),[p_x,p_y])$$
 </p>
 
-<p>It is an up tuple of the time, the coordinates, and the momenta. The time \(t\) has no substructure. The coordinates are an up tuple of the coordinate components \(x\) and \(y\). The momentum is a down tuple of the momentum components \(p_x\) and \(p_y\). In Scheme this is written:
+<p>It is an up tuple of the time, the coordinates, and the momenta. The time \(t\) has no substructure. The coordinates are an up tuple of the coordinate components \(x\) and \(y\). The momentum is a down tuple of the momentum components \(p_x\) and \(p_y\). In Scheme this is written:</p>
 <div class="live norun" id="def-s" data-lib="">
 (define s (up 't (up 'x 'y) (down 'p_x 'p_y)))</div>
-</p>
 
 <p>In order to reference components of tuple structures there are selector functions, for example:
 $$\begin{align}
@@ -200,20 +191,17 @@ I_{2,1}(s) &= p_y\\
 
 <p>The sequence of integer subscripts on the selector describes the access chain to the desired component.</p>
 
-<p>The procedure <code>component</code> is the general selector procedure that implements the selector function \(I_z\):
+<p>The procedure <code>component</code> is the general selector procedure that implements the selector function \(I_z\):</p>
 <div class="live" id="t2" data-lib="lib">
 ((component 0 1) (up (up 'a 'b) (up 'c 'd)))</div>
-</p>
 
-<p>To access a component of a tuple we may also use the selector procedure <code>ref</code>, which takes a tuple and an index and returns the indicated element of the tuple:
+<p>To access a component of a tuple we may also use the selector procedure <code>ref</code>, which takes a tuple and an index and returns the indicated element of the tuple:</p>
 <div class="live" id="t4" data-lib="lib">
 (ref (up 'a 'b 'c) 1)</div>
-</p>
 
-<p>We use zero-based indexing everywhere. The procedure <code>ref</code> can be used to access any substructure of a tree of tuples:
+<p>We use zero-based indexing everywhere. The procedure <code>ref</code> can be used to access any substructure of a tree of tuples:</p>
 <div class="live" id="t5" data-lib="lib">
 (ref (up (up 'a 'b) (up 'c 'd)) 0 1)</div>
-</p>
 
 <p>Two up tuples of the same length may be added or subtracted, elementwise, to produce an up tuple, if the components are compatible for addition. Similarly, two down tuples of the same length may be added or subtracted, elementwise, to produce a down tuple, if the components are compatible for addition.</p>
 
@@ -225,10 +213,9 @@ I_{2,1}(s) &= p_y\\
 $$pv = p_0v^0 + p_1v^1 + p_2v^2$$
 </p>
 
-<p>So the product of tuples that are compatible for contraction is an inner product. Using the tuples <code>p</code> and <code>v</code> defined <a href=#def-pv>above</a> gives us
+<p>So the product of tuples that are compatible for contraction is an inner product. Using the tuples <code>p</code> and <code>v</code> defined <a href=#def-pv>above</a> gives us</p>
 <div class="live" id="t6" data-lib="lib def-pv">
 (html-show-expression (* p v))</div>
-</p>
 
 <p>Contraction of tuples is commutative: \(pv = vp\). Caution: Multiplication of tuples that are compatible for contraction is, in general, not associative. For example, let \(u = ( 5, 2 )\), \(v = ( 11, 13 )\), and \(g = [ [ 3, 5 ], [ 7, 9 ] ]\). Then \(u (g v) = 964\), but \((u g) v = 878\). The expression \(u g v\) is ambiguous. An expression that has this ambiguity does not occur in this book.</p>
 
@@ -313,12 +300,11 @@ $$
 
 <p>The derivative of a function \(f\) is a function, denoted by \(Df\). Our notational convention is that \(D\) is a high-precedence operator. Thus \(D\) operates on the adjacent function before any other application occurs: \(Df(x)\) is the same as \((Df)(x)\). Higher-order derivatives are described by exponentiating the derivative operator. Thus the \(n\)th derivative of a function \(f\) is notated as \(D^n f\).
 
-<p>The Scheme procedure for producing the derivative of a function is named <code>D</code>. The derivative of the <code>sin</code> procedure is a procedure that computes <code>cos</code>:
+<p>The Scheme procedure for producing the derivative of a function is named <code>D</code>. The derivative of the <code>sin</code> procedure is a procedure that computes <code>cos</code>:</p>
 <div class="live" id="d1" data-lib="lib">
 (define derivative-of-sine (D sin))
 
 (html-show-expression (derivative-of-sine 'x))</div>
-</p>
 
 <p>The derivative of a function \(f\) is the function \(Df\) whose value for a particular argument is something that can be multiplied by an increment \(\Delta x\) in the argument to get a linear approximation to the increment in the value of \(f\):
 $$f(x + \Delta x) \approx f(x) + Df(x)\Delta x$$
@@ -340,17 +326,16 @@ So at \(x\),
 $$(D(f \circ g))(x) = Df(g(x)) \cdot Dg(x)$$
 </p>
 
-<p>Derivatives are operators. An operator is like a function except that multiplication of operators is interpreted as composition, whereas multiplication of functions is multiplication of the values (see equation <a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#EQUATION_8.3">8.3</a>). If \(D\) were an ordinary function, then the rule for multiplication would imply that \(D^2 f\) would just be the product of \(Df\) with itself, which is not what is intended. Arithmetic is extended to allow manipulation of operators. A typical operator is \((D + 1)(D - 1) = D^2 - 1\), which subtracts a function from its second derivative. The \(1\) acts as the identity operator: When arithmetically combined with operators, a number is treated as an operator that multiplies its input by the number. Such an operator can be constructed and used in Scheme as follows:
+<p>Derivatives are operators. An operator is like a function except that multiplication of operators is interpreted as composition, whereas multiplication of functions is multiplication of the values (see equation <a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#EQUATION_8.3">8.3</a>). If \(D\) were an ordinary function, then the rule for multiplication would imply that \(D^2 f\) would just be the product of \(Df\) with itself, which is not what is intended. Arithmetic is extended to allow manipulation of operators. A typical operator is \((D + 1)(D - 1) = D^2 - 1\), which subtracts a function from its second derivative. The \(1\) acts as the identity operator: When arithmetically combined with operators, a number is treated as an operator that multiplies its input by the number. Such an operator can be constructed and used in Scheme as follows:<p>
 <div class="live" id="d2" data-lib="lib">
 (html-show-expression
   (((* (- D 1) (+ D 1)) (literal-function 'f)) 'x))</div>
 
 Errata: Note that we do not get <code>(+ (((expt D 2) f) x) (* -1 (f x)))</code> as expected.
-We have to explicitly turn the <code>1</code> into an operator:
+We have to explicitly turn the <code>1</code> into an operator:</p>
 <div class="live" id="d2-bis" data-lib="lib">
 (html-show-expression
   (((* (- D I) (+ D I)) (literal-function 'f)) 'x))</div>
-</p>
 
 <h3>Derivatives of functions of multiple arguments (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_sec_Temp_453"><i class="fa fa-link"></i></a>)</h3>
 
@@ -364,10 +349,9 @@ We have to explicitly turn the <code>1</code> into an operator:
   &= [\partial_0 g(x,y), \partial_1 g(x,y)] \cdot (\Delta x, \Delta y)\\
   &= [\partial_0 g(x,y) \Delta x, \partial_1 g(x,y) \Delta y]
   \end{align}$$
-Using the two-argument literal function g defined <a href="#def-g">above</a>, we have:
+Using the two-argument literal function g defined <a href="#def-g">above</a>, we have:</p>
 <div class="live" id="d3" data-lib="lib def-g">
 (html-show-expression ((D g) 'x 'y))</div>
-</p>
 
 <p>In general, partial derivatives are just the components of the derivative of a function that takes multiple arguments (or structured arguments or both; see below). So a partial derivative of a function is a composition of a component selector and the derivative of that function. Indeed:
 $$\partial_0 g = I_0 \circ Dg$$
@@ -391,7 +375,7 @@ So if \(x\) is a tuple of arguments, then
 $$(\partial_i(f \circ g))(x) = Df(g(x)) \cdot \partial_i g(x)$$
 </p>
 
-<p>Mathematical notation usually does not distinguish functions of multiple arguments and functions of the tuple of arguments. Let \(h((x, y)) = g(x, y)\). The function \(h\), which takes a tuple of arguments \(x\) and \(y\), is not distinguished from the function \(g\) that takes arguments \(x\) and \(y\). We use both ways of defining functions of multiple arguments. The derivatives of both kinds of functions are compatible for contraction with a tuple of increments to the arguments. Scheme comes in handy here:
+<p>Mathematical notation usually does not distinguish functions of multiple arguments and functions of the tuple of arguments. Let \(h((x, y)) = g(x, y)\). The function \(h\), which takes a tuple of arguments \(x\) and \(y\), is not distinguished from the function \(g\) that takes arguments \(x\) and \(y\). We use both ways of defining functions of multiple arguments. The derivatives of both kinds of functions are compatible for contraction with a tuple of increments to the arguments. Scheme comes in handy here:</p>
 <div class="live" id="d4" data-lib="lib def-g">
 (define (h s)
   (g (ref s 0) (ref s 1)))
@@ -402,7 +386,6 @@ $$(\partial_i(f \circ g))(x) = Df(g(x)) \cdot \partial_i g(x)$$
 (html-show-expression ((D g) 'x 'y))
 
 (html-show-expression ((D h) (up 'x 'y)))</div>
-</p>
 
 <p>A phase-space state function is a function of time, coordinates, and momenta. Let \(H\) be such a function. The value of \(H\) is \(H(t, ( x, y ), [ p_x , p_y ] )\) for time \(t\), coordinates \(( x, y )\) , and momenta \([ p_x , p_y ]\). Let \(s\) be the phase-space state tuple as <a href="#def-s">above</a>:
 $$s = (t,(x,y),[p_x,p_y])$$
@@ -429,7 +412,7 @@ $$\begin{align}
 
 <p>Caution: Partial derivative operators with respect to different structured arguments generally do not commute.</p>
 
-<p>In Scheme we must make explicit choices. We usually assume phase-space state functions are functions of the tuple. For example,
+<p>In Scheme we must make explicit choices. We usually assume phase-space state functions are functions of the tuple. For example,</p>
 <div class="live" id="d5" data-lib="lib def-s">
 (define H
   (literal-function 'H
@@ -440,7 +423,6 @@ $$\begin{align}
 
 (html-show-expression
  ((D H) s))</div>
-</p>
 
 <h3>Structured results (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_sec_Temp_454"><i class="fa fa-link"></i></a>)</h3>
 
@@ -454,21 +436,19 @@ $$h(t) = (\cos t,\sin t, t) = (\cos,\sin,I)(t)$$
 $$Dh(t) = (- \sin t,\cos t,1)$$
 </p>
 
-<p>In Scheme we can write
+<p>In Scheme we can write</p>
 <div class="live norun" id="def-helix" data-lib="">
 (define (helix t)
   (up (cos t) (sin t) t))</div>
 
-or just
+<p>or just</p>
 <div class="live norun" id="def-helix-alt" data-lib="">
 (define helix (up cos sin identity))</div>
-</p>
 
-<p>Its derivative is just the up tuple of the derivatives of each component of the function:
+<p>Its derivative is just the up tuple of the derivatives of each component of the function:</p>
 <div class="live" id="r1" data-lib="lib def-helix">
 (html-show-expression
   ((D helix) 't))</div>
-</p>
 
 <p>In general, a function that produces structured outputs is just treated as a structure of functions, one for each of the components. The derivative of a function of structured inputs that produces structured outputs is an object that when contracted with an incremental input structure produces a linear approximation to the incremental output. Thus, if we define function \(g\) by
 $$g(x,y) = ((x+y)^2,(y-x)^3,e^{x+y})$$
@@ -490,14 +470,13 @@ $$Dg(x,y) =
 $$
 </p>
 
-<p>In Scheme:
+<p>In Scheme:</p>
 <div class="live" id="r2" data-lib="lib">
 (define (g x y)
   (up (square (+ x y)) (cube (- y x)) (exp (+ x y))))
 
 (html-show-expression
   ((D g) 'x 'y))</div>
-</p>
 
 
 <h2>Exercise 8.1 (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_thm_8.1"><i class="fa fa-link"></i></a>) Chain rule</h2>
@@ -518,7 +497,7 @@ $$
 
 <p>We can represent functions of multiple arguments as procedures in several ways, depending upon how we wish to use them. The simplest idea is to identify the procedure arguments with the function's arguments.</p>
 
-<p>For example, we could write implementations of the functions that occur in exercise 8.1 as follows:
+<p>For example, we could write implementations of the functions that occur in exercise 8.1 as follows:</p>
 <div class="live" id="ex8-2-alt1" data-lib="lib">
 (define (f x y)
   (* (square x) (cube y)))
@@ -533,11 +512,10 @@ $$
 
 
 </div>
-</p>
 
 <p>With this choice it is awkward to compose a function that takes multiple arguments, such as <code>f</code>, with a function that produces a tuple of those arguments, such as <code>g</code>. Alternatively, we can represent the function arguments as slots of a tuple data structure, and then composition with a function that produces such a data structure is easy. However, this choice requires the procedures to build and take apart structures.</p>
 
-<p>For example, we may define procedures that implement the functions above as follows:
+<p>For example, we may define procedures that implement the functions above as follows:</p>
 <div class="live" id="ex8-2-alt2" data-lib="lib">
 (define (f v)
   (let ((x (ref v 0))
@@ -555,7 +533,6 @@ $$
 
 
 </div>
-</p>
 
 <p>Repeat exercise 8.1 using the computer. Explore both implementations of multiple-argument functions.</p>
 
