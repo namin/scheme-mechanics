@@ -60,7 +60,66 @@ as <a href="http://groups.csail.mit.edu/mac/users/gjs/6946/refman.txt"><code>SCM
 
 (html-show-expression ((Lagrange-eq (L 'm) q) 't)))</div>
 
-<h2>Notation (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html"><i class="fa fa-link"></i></a>)</h2>
+<h2><a name="notation"></a>Appendix: Our Notation (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html"><i class="fa fa-link"></i></a>)</h2>
+
+<blockquote>
+<p>An adequate notation should be understood by at least two people, one of whom may be the author.</p>
+
+Abdus Salam (1950).
+</blockquote>
+
+<p>We adopt a functional mathematical notation that is close to that used by Spivak in his Calculus on Manifolds [<a href="https://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-80.html#cite{Spivak}">40</a>]. The use of functional notation avoids many of the ambiguities of traditional mathematical notation; the ambiguities of traditional notation that can impede clear reasoning in classical mechanics. Functional notation carefully distinguishes the function from the value of the function when applied to particular arguments. In functional notation mathematical expressions are unambiguous and self-contained.</p>
+
+<p>We adopt a <em>generic arithmetic</em> in which the basic arithmetic operations, such as addition and multiplication, are extended to a wide variety of mathematical types. Thus, for example, the addition operator <code>+</code> can be applied to numbers, tuples of numbers, matrices, functions, etc. Generic arithmetic formalizes the common informal practice used to manipulate mathematical objects.</p>
+
+<p>We often want to manipulate aggregate quantities, such as the collection of all of the rectangular coordinates of a collection of particles, without explicitly manipulating the component parts. Tensor arithmetic provides a traditional way of manipulating aggregate objects: Indices label the parts; conventions, such as the summation convention, are introduced to manipulate the indices. We introduce a tuple arithmetic as an alternative way of manipulating aggregate quantities that usually lets us avoid labeling the parts with indices. Tuple arithmetic is inspired by tensor arithmetic but it is more general: not all of the components of a tuple need to be of the same size or type.</p>
+
+<p>The mathematical notation is in one-to-one correspondence with expressions of the computer language <em>Scheme</em> [<a href="https://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-80.html#cite{IEEE-Scheme-standard}">24</a>]. Scheme is based on the \(\lambda\)-calculus [<a href="https://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-80.html#cite{Church}">13</a>] and directly supports the manipulation of functions. We augment Scheme with symbolic, numerical, and generic features to support our applications. For a simple introduction to Scheme, see the Scheme appendix. The correspondence between the mathematical notation and Scheme requires that mathematical expressions be unambiguous and self-contained. Scheme provides immediate feedback in verification of mathematical deductions and facilitates the exploration of the behavior of systems.</p>
+
+<h3>Functions (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_sec_Temp_448"><i class="fa fa-link"></i></a>)</h3>
+
+<p>The value of the function \(f\), given the argument \(x\), is written \(f(x)\). The expression \(f(x)\) denotes the value of the function at the given argument; when we wish to denote the function we write just \(f\). Functions may take several arguments. For example, we may have the function that gives the Euclidean distance between two points in the plane given by their rectangular coordinates:
+$$d(x_1,y_1,x_2,y_2) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+</p>
+
+<p>In Scheme we can write this as:
+<div class="live" id="f1" data-lib="lib">
+(define (d x1 y1 x2 y2)
+  (sqrt (+ (square (- x2 x1)) (square (- y2 y1)))))
+
+(html-show-expression
+  (d 'x1 'y1 'x2 'y2))</div>
+</p>
+
+<p>Functions may be composed if the range of one overlaps the domain of the other. The composition of functions is constructed by passing the output of one to the input of the other. We write the composition of two functions using the \(\circ\) operation:
+$$(f \circ g) : x \mapsto (f \circ g)(x) = f(g(x))$$
+</p>
+
+<p>A procedure <code>h</code> that computes the cube of the sine of its argument may be defined by composing the procedures <code>cube</code> and <code>sin</code>:
+<div class="live" id="f2" data-lib="lib">
+(define h (compose cube sin))
+
+(h 2)</div>
+which is the same as
+<div class="live" id="f3" data-lib="lib">
+(cube (sin 2))</div>
+</p>
+
+<p>Arithmetic is extended to the manipulation of functions: the usual mathematical operations may be applied to functions. Examples are addition and multiplication; we may add or multiply two functions if they take the same kinds of arguments and if their values can be added or multiplied:
+$$\begin{align}
+(f + g)(x) &= f(x) + g(x)\\
+   (fg)(x) &= f(x)g(x)
+\end{align}$$
+</p>
+
+<p>A procedure <code>g</code> that multiplies the cube of its argument by the sine of its argument is
+<div class="live" id="f4" data-lib="lib">
+(define g (* cube sin))
+
+(g 2)
+
+(* (cube 2) (sin 2))</div>
+</p>
 
 <h3>Symbolic values (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_sec_Temp_449"><i class="fa fa-link"></i></a>)</h3>
 
