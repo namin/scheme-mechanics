@@ -437,4 +437,60 @@ $$\begin{align}
  ((D H) s))</div>
 </p>
 
+<h3>Structured results (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_sec_Temp_454"><i class="fa fa-link"></i></a>)</h3>
+
+<p>Some functions produce structured outputs. A function whose output is a tuple is equivalent to a tuple of component functions each of which produces one component of the output tuple.</p>
+
+<p>For example, a function that takes one numerical argument and produces a structure of outputs may be used to describe a curve through space. The following function describes a helical path around the \(z\)-axis in three-dimensional space:
+$$h(t) = (\cos t,\sin t, t) = (\cos,\sin,I)(t)$$
+</p>
+
+<p>The derivative is just the up tuple of the derivatives of each component of the function:
+$$Dh(t) = (- \sin t,\cos t,1)$$
+</p>
+
+<p>In Scheme we can write
+<div class="live norun" id="def-helix" data-lib="">
+(define (helix t)
+  (up (cos t) (sin t) t))</div>
+
+or just
+<div class="live norun" id="def-helix-alt" data-lib="">
+(define helix (up cos sin identity))</div>
+</p>
+
+<p>Its derivative is just the up tuple of the derivatives of each component of the function:
+<div class="live" id="r1" data-lib="lib def-helix">
+(html-show-expression
+  ((D helix) 't))</div>
+</p>
+
+<p>In general, a function that produces structured outputs is just treated as a structure of functions, one for each of the components. The derivative of a function of structured inputs that produces structured outputs is an object that when contracted with an incremental input structure produces a linear approximation to the incremental output. Thus, if we define function \(g\) by
+$$g(x,y) = ((x+y)^2,(y-x)^3,e^{x+y})$$
+then the derivative of \(g\) is
+$$Dg(x,y) =
+\left[
+\begin{pmatrix}
+  2(x + y) \\
+  -3(y-x)^2 \\
+  e^{x+y}
+\end{pmatrix}
+,
+\begin{pmatrix}
+  2(x + y) \\
+  3(y-x)^2 \\
+  e^{x+y}
+\end{pmatrix}
+\right]
+$$
+</p>
+
+<p>In Scheme:
+<div class="live" id="r2" data-lib="lib">
+(define (g x y)
+  (up (square (+ x y)) (cube (- y x)) (exp (+ x y))))
+
+(html-show-expression
+  ((D g) 'x 'y))</div>
+</p>
 {% endblock %}
