@@ -493,4 +493,65 @@ $$
 (html-show-expression
   ((D g) 'x 'y))</div>
 </p>
+
+
+<h2>Exercise 8.1 (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_thm_8.1"><i class="fa fa-link"></i></a>) Chain rule</h2>
+
+<p>Let \(F(x, y) = x^2 y^3\), \(G(x, y) = (F(x, y), y)\), and \(H(x, y) = F(F(x, y), y)\), so that \(H = F \circ G\).
+<ol>
+<li>  Compute \(\partial_0 F(x, y)\) and \(\partial_1 F(x, y)\).</li>
+
+<li>  Compute \(\partial_0 F(F(x, y), y)\) and \(\partial_1 F(F(x, y), y)\).</li>
+
+<li>  Compute \(\partial_0 G(x, y)\) and \(\partial_1 G(x, y)\).</li>
+
+<li>  Compute \(DF(a, b)\), \(DG(3, 5)\) and \(DH(3a^2, 5b^3)\).</li>
+</ol>
+</p>
+
+<h2>Exercise 8.2 (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_thm_8.2"><i class="fa fa-link"></i></a>) Computing derivatives</h2>
+
+<p>We can represent functions of multiple arguments as procedures in several ways, depending upon how we wish to use them. The simplest idea is to identify the procedure arguments with the function's arguments.</p>
+
+<p>For example, we could write implementations of the functions that occur in exercise 8.1 as follows:
+<div class="live" id="ex8-2-alt1" data-lib="lib">
+(define (f x y)
+  (* (square x) (cube y)))
+(define (g x y)
+  (up (f x y) y))
+(define (h x y)
+  (f (f x y) y))
+
+
+
+
+
+
+</div>
+</p>
+
+<p>With this choice it is awkward to compose a function that takes multiple arguments, such as <code>f</code>, with a function that produces a tuple of those arguments, such as <code>g</code>. Alternatively, we can represent the function arguments as slots of a tuple data structure, and then composition with a function that produces such a data structure is easy. However, this choice requires the procedures to build and take apart structures.</p>
+
+<p>For example, we may define procedures that implement the functions above as follows:
+<div class="live" id="ex8-2-alt2" data-lib="lib">
+(define (f v)
+  (let ((x (ref v 0))
+        (y (ref v 1)))
+    (* (square x) (cube y))))
+(define (g v)
+  (let ((x (ref v 0))
+        (y (ref v 1)))
+    (up (f v) y)))
+(define h (compose f g))
+
+
+
+
+
+
+</div>
+</p>
+
+<p>Repeat exercise 8.1 using the computer. Explore both implementations of multiple-argument functions.</p>
+
 {% endblock %}
