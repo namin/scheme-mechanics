@@ -60,7 +60,7 @@ as <a href="http://groups.csail.mit.edu/mac/users/gjs/6946/refman.txt"><code>SCM
 
 (html-show-expression ((Lagrange-eq (L 'm) q) 't)))</div>
 
-<h2><a name="notation"></a>(Chapter 8) Appendix: Our Notation (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html"><i class="fa fa-link"></i></a>)</h2>
+<h2><a id="notation"></a>(Chapter 8) Appendix: Our Notation (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html"><i class="fa fa-link"></i></a>)</h2>
 
 <blockquote>
 <p>An adequate notation should be understood by at least two people, one of whom may be the author.</p>
@@ -150,11 +150,11 @@ $$\begin{align}
 
 <h3>Tuples (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_sec_Temp_450"><i class="fa fa-link"></i></a>)</h3>
 
-<p>There are two kinds of tuples: <em>up</em> tuples and <em>down</em> tuples. We write tuples as ordered lists of their components; a tuple is delimited by parentheses if it is an up tuple and by square brackets if it is a down tuple. For example, <a name="v"></a>the up tuple \(v\) of velocity components \(v^0\), \(v^1\), and \(v^2\) is
+<p>There are two kinds of tuples: <em>up</em> tuples and <em>down</em> tuples. We write tuples as ordered lists of their components; a tuple is delimited by parentheses if it is an up tuple and by square brackets if it is a down tuple. For example, <a id="v"></a>the up tuple \(v\) of velocity components \(v^0\), \(v^1\), and \(v^2\) is
 $$v = (v^0,v^1,v^2)$$
 </p>
 
-<p><a name="p"></a>The down tuple \(p\) of momentum components \(p_0\), \(p_1\), and \(p_2\) is
+<p><a id="p"></a>The down tuple \(p\) of momentum components \(p_0\), \(p_1\), and \(p_2\) is
 $$p = [p_0,p_1,p_2]$$
 </p>
 
@@ -339,7 +339,7 @@ We have to explicitly turn the <code>1</code> into an operator:</p>
 
 <h3>Derivatives of functions of multiple arguments (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_sec_Temp_453"><i class="fa fa-link"></i></a>)</h3>
 
-<p?The derivative generalizes to functions that take multiple arguments. The derivative of a real-valued function of multiple arguments is an object whose contraction with the tuple of increments in the arguments gives a linear approximation to the increment in the function's value.</p>
+<p>The derivative generalizes to functions that take multiple arguments. The derivative of a real-valued function of multiple arguments is an object whose contraction with the tuple of increments in the arguments gives a linear approximation to the increment in the function's value.</p>
 
 <p>A function of multiple arguments can be thought of as a function of an up tuple of those arguments. Thus an incremental argument tuple is an up tuple of components, one for each argument position. The derivative of such a function is a down tuple of the partial derivatives of the function with respect to each argument position.</p>
 
@@ -481,7 +481,7 @@ $$
 
 <h2>Exercise 8.1 (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_thm_8.1"><i class="fa fa-link"></i></a>) Chain rule</h2>
 
-<p>Let \(F(x, y) = x^2 y^3\), \(G(x, y) = (F(x, y), y)\), and \(H(x, y) = F(F(x, y), y)\), so that \(H = F \circ G\).
+<p>Let \(F(x, y) = x^2 y^3\), \(G(x, y) = (F(x, y), y)\), and \(H(x, y) = F(F(x, y), y)\), so that \(H = F \circ G\).</p>
 <ol>
 <li>  Compute \(\partial_0 F(x, y)\) and \(\partial_1 F(x, y)\).</li>
 
@@ -491,7 +491,6 @@ $$
 
 <li>  Compute \(DF(a, b)\), \(DG(3, 5)\) and \(DH(3a^2, 5b^3)\).</li>
 </ol>
-</p>
 
 <h2>Exercise 8.2 (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_thm_8.2"><i class="fa fa-link"></i></a>) Computing derivatives</h2>
 
