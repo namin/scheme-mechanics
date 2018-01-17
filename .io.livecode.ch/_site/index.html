@@ -344,7 +344,12 @@ $$(D(f \circ g))(x) = Df(g(x)) \cdot Dg(x)$$
 <div class="live" id="d2" data-lib="lib">
 (html-show-expression
   (((* (- D 1) (+ D 1)) (literal-function 'f)) 'x))</div>
-(TODO: we do not get <code>(+ (((expt D 2) f) x) (* -1 (f x)))</code> as expected.)
+
+Errata: Note that we do not get <code>(+ (((expt D 2) f) x) (* -1 (f x)))</code> as expected.
+We have to explicitly turn the <code>1</code> into an operator:
+<div class="live" id="d2-bis" data-lib="lib">
+(html-show-expression
+  (((* (- D I) (+ D I)) (literal-function 'f)) 'x))</div>
 </p>
 
 <h3>Derivatives of functions of multiple arguments (<a href="http://mitpress.mit.edu/sites/default/files/titles/content/sicm/book-Z-H-79.html#%_sec_Temp_453"><i class="fa fa-link"></i></a>)</h3>
